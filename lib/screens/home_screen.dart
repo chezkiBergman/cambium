@@ -50,6 +50,8 @@ class HomeScreen extends ConsumerWidget {
   }
 
   Widget sortBySearch(WidgetRef ref, BuildContext context) {
+      final textController = ref.watch(textControllerProvider);
+
     return Container(
       height: 50,
       constraints: BoxConstraints(maxWidth: MediaQuery.of(context).size.width),
@@ -58,7 +60,7 @@ class HomeScreen extends ConsumerWidget {
           const ShadowDecoration(
             radiusCircular: 22,
           ),
-          TextFormField(
+          TextFormField(controller: textController,
             onChanged: (value) {
               ref.read(searchProvider.notifier).state = value;
               ref.read(sortOptionProvider.notifier).state = 0;

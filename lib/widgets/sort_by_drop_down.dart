@@ -29,17 +29,18 @@ class SortDropdownWidget extends ConsumerWidget {
               if (newValue != null) {
                 ref.read(sortOptionProvider.notifier).state = newValue;
                 ref.read(searchProvider.notifier).state = '';
+               ref.read(textControllerProvider).clear(); // איפוס השדה
               }
             },
-            decoration:  InputDecoration(
+            decoration: InputDecoration(
               contentPadding: const EdgeInsetsDirectional.only(
                   top: 5, bottom: 5, start: 15, end: 10),
-              labelText:S.current.sort ,
+              labelText: S.current.sort,
               border: InputBorder.none,
-             
-            ),isExpanded: true,
-            items:  [
-              DropdownMenuItem( value: 0, child: Text(S.current.without_sort)),
+            ),
+            isExpanded: true,
+            items: [
+              DropdownMenuItem(value: 0, child: Text(S.current.without_sort)),
               DropdownMenuItem(value: 1, child: Text(S.current.young_to_old)),
               DropdownMenuItem(value: 2, child: Text(S.current.old_young_to)),
             ],

@@ -1,10 +1,12 @@
+import 'package:flutter/material.dart';
 import 'package:flutter_application_1/core/models/user_model.dart';
 import 'package:flutter_application_1/providers/user_provider.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 final searchProvider = StateProvider<String>((ref) => '');
 final sortOptionProvider = StateProvider<int>((ref) => 0);
-
+final textControllerProvider =
+    StateProvider<TextEditingController>((ref) => TextEditingController());
 final filteredUsersProvider = Provider<List<UserModel>>((ref) {
   final users = ref.watch(userNotifierProvider).asData?.value ?? [];
   final searchQuery = ref.watch(searchProvider).toLowerCase().trim();
