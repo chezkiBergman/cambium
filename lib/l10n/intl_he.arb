@@ -1,0 +1,13 @@
+{
+       "sort": "מיון",
+       "users_title": "משתמשים",
+       "user_favorites": "מועדפים",
+       "no_favorites": "אין מועדפים עדיין",
+       "error_loading_favorites": "שגיאה בטעינת המועדפים:",
+       "search_placeholder": "חפש לפי שם, אימייל, תאריך",
+       "young_to_old": "מהצעיר לזקן",
+       "without_sort": "ללא מיון",
+       "date_of_birth": "תאריך לידה",
+       "old_young_to": "מהזקן לצעיר"
+   }
+   

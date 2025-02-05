@@ -1,0 +1,11 @@
+{
+    "sort": "Sort",
+    "users_title": "Users",
+    "user_favorites": "Favorites",
+    "no_favorites": "No favorites yet",
+    "error_loading_favorites": "Error loading favorites:",
+    "search_placeholder": "Search by name, email, date",
+    "young_to_old": "Young to old",  "old_young_to": "Old to young",
+    "without_sort": "Without sort",
+    "date_of_birth": "Date of Birth"
+}
