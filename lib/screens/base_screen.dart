@@ -16,71 +16,74 @@ class BaseScreen extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final selectedIndex = ref.watch(selectedIndexProvider);
-    final isHomeScreen = selectedIndex == 0;
-
     return Scaffold(
-      appBar: AppBar(
-        centerTitle: true,
-        title: CustomSwitchLocal(
-          value: ref.watch(localeProvider).languageCode ==
-              S.delegate.supportedLocales.last.languageCode,
-          onChanged: (value) {
-            final newLocale = ref.read(localeProvider) ==
-                    Locale(
-                      S.delegate.supportedLocales.last.languageCode,
-                    )
-                ? Locale(
-                    S.delegate.supportedLocales.first.languageCode,
-                  )
-                : Locale(
-                    S.delegate.supportedLocales.last.languageCode,
-                  );
-            ref.read(localeProvider.notifier).state = newLocale;
-          },
-        ),
-        leadingWidth: 100,
-        leading: Padding(
-          padding: const EdgeInsets.all(8.0),
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.start,
-            children: [
-              Flexible(
-                child: Text(
-                  isHomeScreen ? S.current.sort : S.current.user_favorites,
-                  style: const TextStyle(color: Colors.white, fontSize: 20),
-                ),
-              ),
-            ],
-          ),
-        ),
-        flexibleSpace: Container(
-          decoration: const BoxDecoration(
-            gradient: LinearGradient(
-              colors: CustomColors.gradientColors,
-              begin: Alignment.centerLeft,
-              end: Alignment.centerRight,
-            ),
-          ),
-        ),
-        actions: [
-          IconButton(
-            icon: Icon(isHomeScreen ? Icons.favorite : Icons.home),
-            onPressed: () {
-              ref.read(selectedIndexProvider.notifier).state =
-                  isHomeScreen ? 1 : 0;
-              mainNavigatorKey.currentState?.pushReplacementNamed(
-                isHomeScreen ? AppRoutes.favorites : AppRoutes.home,
-              );
-            },
-          ),
-        ],
-      ),
+      appBar: appBar(ref),
       body: Navigator(
         key: mainNavigatorKey,
         initialRoute: AppRoutes.home,
         onGenerateRoute: AppRouter.generateRoute,
       ),
+    );
+  }
+
+  PreferredSizeWidget appBar(WidgetRef ref) {
+    final selectedIndex = ref.watch(selectedIndexProvider);
+    final isHomeScreen = selectedIndex == 0;
+    return AppBar(
+      centerTitle: true,
+      title: CustomSwitchLocal(
+        value: ref.watch(localeProvider).languageCode ==
+            S.delegate.supportedLocales.last.languageCode,
+        onChanged: (value) {
+          final newLocale = ref.read(localeProvider) ==
+                  Locale(
+                    S.delegate.supportedLocales.last.languageCode,
+                  )
+              ? Locale(
+                  S.delegate.supportedLocales.first.languageCode,
+                )
+              : Locale(
+                  S.delegate.supportedLocales.last.languageCode,
+                );
+          ref.read(localeProvider.notifier).state = newLocale;
+        },
+      ),
+      leadingWidth: 100,
+      leading: Padding(
+        padding: const EdgeInsets.all(8.0),
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.start,
+          children: [
+            Flexible(
+              child: Text(
+                isHomeScreen ? S.current.sort : S.current.user_favorites,
+                style: const TextStyle(color: Colors.white, fontSize: 20),
+              ),
+            ),
+          ],
+        ),
+      ),
+      flexibleSpace: Container(
+        decoration: const BoxDecoration(
+          gradient: LinearGradient(
+            colors: CustomColors.gradientColors,
+            begin: Alignment.centerLeft,
+            end: Alignment.centerRight,
+          ),
+        ),
+      ),
+      actions: [
+        IconButton(
+          icon: Icon(isHomeScreen ? Icons.favorite : Icons.home),
+          onPressed: () {
+            ref.read(selectedIndexProvider.notifier).state =
+                isHomeScreen ? 1 : 0;
+            mainNavigatorKey.currentState?.pushReplacementNamed(
+              isHomeScreen ? AppRoutes.favorites : AppRoutes.home,
+            );
+          },
+        ),
+      ],
     );
   }
 }
